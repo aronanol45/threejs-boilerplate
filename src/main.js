@@ -32,7 +32,6 @@ class Experience {
     this.renderer = new THREE.WebGLRenderer({
       canvas: document.querySelector(this.canvasRef),
     });
-    console.log(this.getAdjustedPixelRatio());
     this.renderer.setPixelRatio(this.getAdjustedPixelRatio());
 
     this.geometry = new THREE.BoxGeometry(1, 1, 1);
