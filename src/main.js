@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { isTouchDevice } from "./utils/isTouchDevice";
+import Stats from "three/examples/jsm/libs/stats.module.js";
 
 class Experience {
   constructor(canvasRef) {
@@ -41,7 +42,6 @@ class Experience {
 
     this.camera.position.z = 5;
     this.onResize();
-    this.animate();
 
     // avoid to trigger onResize on mobile adressbar hide/show
     if (isTouchDevice()) {
@@ -61,13 +61,21 @@ class Experience {
         false,
       );
     }
+
+    // other toolings
+    this.stats = new Stats();
+    document.body.appendChild(this.stats.dom);
+
+    this.animate();
   }
 
   animate() {
+    this.stats.begin();
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
 
     this.renderer.render(this.scene, this.camera);
+    this.stats.end();
 
     requestAnimationFrame(() => {
       this.animate();
